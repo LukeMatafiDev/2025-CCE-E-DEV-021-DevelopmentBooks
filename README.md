@@ -52,26 +52,27 @@ cd developmentbooks
    REQUEST URL:           http://localhost:8080/cart/list
    #### REQUEST TYPE:          POST
 
-   REQUEST BODY:  JSON
-   #### {
-   "cart":[
-   "Clean Code",
-   "Clean Code",
-   "The Clean Coder",
-   "The Clean Coder",
-   "Clean Architecture",
-   "Clean Architecture",
-   "Test Driven Development by Example",
-   "Working Effectively With Legacy Code"
-   ]
+   #### 
+```json
 
+REQUEST BODY
+{
+"cart":[
+"Clean Code",
+"Clean Code",
+"The Clean Coder",
+"The Clean Coder"
+    ]
 }
 
-### 8) Expected result is a json with structure below
+RESPONSE BODY
 
 {
 "cartTotal": 320.0
 }
+
+
+
 
 
 
