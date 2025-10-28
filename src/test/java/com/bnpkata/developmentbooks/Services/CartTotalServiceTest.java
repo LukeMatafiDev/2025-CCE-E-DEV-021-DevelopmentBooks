@@ -27,4 +27,12 @@ public class CartTotalServiceTest {
         assertEquals(95.0, price);
     }
 
+    @Test
+    void threeDifferentBooksWith10PercentDiscount() {
+        double price = service.calculatePrice(List.of("Clean Code","Clean Architecture", "The Clean Coder"));
+        assertEquals(135.0, price);
+    }
+
+
+
 }
