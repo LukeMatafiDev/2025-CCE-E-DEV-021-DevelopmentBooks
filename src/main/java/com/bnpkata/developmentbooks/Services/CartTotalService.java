@@ -17,19 +17,28 @@ public class CartTotalService {
             5, 0.25
     );
 
-    //Add a discount mapping and compute price when all books are distinct
+    //Add a discount mapping and compute price when all books are distinct removing duplicates
     public double calculatePrice(List<String> basket) {
         if (basket == null || basket.isEmpty()) return 0.0;
 
-        Set<String> distinct = Set.copyOf(basket);
-        int distinctCount = distinct.size();
+        Map<String, Integer> counts = new HashMap<>();
+        for (String b : basket) counts.put(b, counts.getOrDefault(b, 0) + 1);
 
-        if (basket.size() == distinctCount) {
-            double discount = DISCOUNTS.getOrDefault(distinctCount, 0.0);
-            return distinctCount * BOOK_PRICE * (1 - discount);
+        double total = 0.0;
+        while (counts.values().stream().anyMatch(c -> c > 0)) {
+
+            List<String> group = new ArrayList<>();
+            for (String book : new ArrayList<>(counts.keySet())) {
+                if (counts.get(book) > 0) {
+                    group.add(book);
+                    counts.put(book, counts.get(book) - 1);
+                }
+            }
+            int size = group.size();
+            double discount = DISCOUNTS.getOrDefault(size, 0.0);
+            total += size * BOOK_PRICE * (1 - discount);
         }
-
-        return 0.0;
+        return Math.round(total * 100.0) / 100.0;
     }
 
 
