@@ -47,5 +47,19 @@ public class CartTotalServiceTest {
         assertEquals(187.5, price);
     }
 
+    @Test
+    void Example() {
+        List<String> books = List.of(
+                "Clean Code", "Clean Code",
+                "The Clean Coder", "The Clean Coder",
+                "Clean Architecture", "Clean Architecture",
+                "Test Driven Development by Example",
+                "Working Effectively With Legacy Code"
+        );
+
+        double price = service.calculatePrice(books);
+        assertEquals(320.0, price);
+    }
+
 
 }
